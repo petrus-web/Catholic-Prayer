@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>要經彙集 - 完整目錄</title>
+    <style>
+        /* 使用與常用經文一致的字體 Stack */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Microsoft JhengHei', 'Heiti TC', 'Apple LiGothic', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            color: #d35400;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .header p {
+            color: #7f8c8d;
+            margin-top: 0;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #e67e22;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        /* 卡片網格排版 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        /* 卡片樣式 */
+        .prayer-card {
+            display: block;
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-top: 6px solid #e67e22;
+            transition: all 0.3s ease;
+            height: 100%;
+            box-sizing: border-box;
+        }
+        .prayer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(230, 126, 34, 0.15);
+            background-color: #fffaf5;
+        }
+        .prayer-card h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+            color: #d35400;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        .prayer-card p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+        /* 章節標題 */
+        .section-title {
+            grid-column: 1 / -1;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #e67e22;
+            font-size: 1.2em;
+            border-left: 4px solid #e67e22;
+            padding-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← 返回首頁 Back to Home</a>
+
+        <div class="header">
+            <h1>要經彙集</h1>
+            <p>全書目錄</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="section-title">每日課業</div>
+            
+            <a href="tsaotao.html" class="prayer-card">
+                <h2>早 禱</h2>
+                <p>早上初起身時誦念</p>
+            </a>
+
+            <a href="wantao.html" class="prayer-card">
+                <h2>晚 禱</h2>
+                <p>每晚安息前誦念</p>
+            </a>
+            <a href="chita.html" class="prayer-card">
+                <h2>其 他</h2>
+                <p>按需加念之經文</p>
+            </a>
+
+            <div class="section-title">聖事與敬禮</div>
+
+            <a href="misakueicheng.html" class="prayer-card">
+                <h2>彌撒規程</h2>
+                <p>參與大祭與領聖體前後誦</p>
+            </a>
+
+            <a href="hsiehshengtiching.html" class="prayer-card">
+                <h2>謝聖體經</h2>
+                <p>領受聖體後之感謝祝文</p>
+            </a>
+            <!--
+            <div class="section-title">週主日與瞻禮</div>
+
+            <a href="chouchujihtaowen.html" class="prayer-card">
+                <h2>週主日禱文</h2>
+                <p>欽崇聖三、拯救煉靈與護守天神</p>
+            </a>
+
+            <a href="yehsushenghsin.html" class="prayer-card">
+                <h2>耶穌聖心</h2>
+                <p>瞻禮六：虔敬耶穌聖心禱文</p>
+            </a>
+
+            <a href="shengmushenghsin.html" class="prayer-card">
+                <h2>聖母聖心</h2>
+                <p>瞻禮七：孝敬仁慈聖母禱文</p>
+            </a>
+
+            <div class="section-title">聖母敬禮</div>
+
+            <a href="meikueiching.html" class="prayer-card">
+                <h2>玫瑰經</h2>
+                <p>歡喜、痛苦、榮福與光明端</p>
+            </a>
+
+            <div class="section-title">苦路善工</div>
+
+            <a href="shenglushankung.html" class="prayer-card">
+                <h2>聖路善工</h2>
+                <p>默思耶穌受難十四處</p>
+            </a>
+
+            <div class="section-title">附錄</div>
+
+            <a href="fulu.html" class="prayer-card">
+                <h2>附 錄</h2>
+                <p>省察告解、付洗要式與雜經</p>
+            </a>
+        </div>
+        -->
+    </div>
+</body>
+</html>

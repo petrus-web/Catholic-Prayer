@@ -3,84 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>常用經文 (Common Prayers) - 首頁 (Home)</title>
+    <title>經文目錄 - 首頁</title>
     <style>
         body {
-            font-family: "Microsoft JhengHei", Arial, sans-serif;
+            font-family: "Microsoft JhengHei", "Microsoft YaHei", Arial, sans-serif;
             background-color: #f4f7f6;
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
+            padding: 40px 0;
         }
         .container {
             background: white;
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            max-width: 600px;
+            max-width: 700px;
             width: 90%;
-            text-align: center;
         }
-        h1 {
+        .main-title {
+            text-align: center;
             color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2.2em;
+        }
+        
+        .section-title {
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
-            margin-bottom: 30px;
-            font-size: 2em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            display: flex;
+            align-items: baseline;
         }
-        h1 span {
-            display: block;
-            font-size: 0.6em;
+        .section-title a {
+            text-decoration: none;
+            color: #2c3e50;
+            transition: color 0.3s;
+        }
+        .section-title a:hover {
+            color: #3498db;
+        }
+        .section-title span {
+            margin-left: 10px;
             color: #7f8c8d;
-            margin-top: 5px;
+            font-size: 0.7em;
             font-weight: normal;
         }
-        ul {
+        .section-title a:hover span {
+             color: #3498db;
+             transition: color 0.3s;
+        }
+
+        /* 要经汇集的特殊颜色设计 */
+        .special-title {
+            border-bottom-color: #e67e22;
+        }
+        .special-title a:hover {
+            color: #e67e22;
+        }
+
+        .prayer-list {
             list-style: none;
             padding: 0;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
         }
-        li {
-            margin: 15px 0;
-        }
-        a {
+        .prayer-list a {
             text-decoration: none;
             color: #34495e;
             font-size: 1.1em;
             font-weight: 500;
             transition: all 0.3s;
             display: block;
-            padding: 12px;
+            padding: 12px 15px;
             border-radius: 8px;
             background: #fdfdfd;
             border: 1px solid #eee;
+            text-align: center;
         }
-        a:hover {
+        /* 常用经文鼠标悬停（蓝色） */
+        .common-prayers a:hover {
             color: #3498db;
             background: #f0f8ff;
             border-color: #3498db;
             transform: translateY(-2px);
+        }
+        /* 要经汇集鼠标悬停（橙色） */
+        .special-prayers a:hover {
+            color: #e67e22;
+            background: #fff5e6;
+            border-color: #e67e22;
+            transform: translateY(-2px);
+        }
+        
+        @media (min-width: 600px) {
+            .common-prayers.prayer-list {
+                grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>常用經文 Common Prayers</h1>
-    <nav>
-        <ul>
-            <li><a href="prayers.html#sign-of-the-cross">聖號經 (The Sign of the Cross)</a></li>
-            <li><a href="prayers.html#our-father">天主經 (Our Father)</a></li>
-            <li><a href="prayers.html#hail-mary">聖母經 (Hail Mary)</a></li>
-            <li><a href="prayers.html#glory-be">聖三光榮經 (Glory Be)</a></li>
-            <li><a href="prayers.html#act-of-contrition">痛悔經 (Act of Contrition)</a></li>
-            <li><a href="prayers.html#hail-holy-queen">又聖母經 (Hail Holy Queen)</a></li>
-            <li><a href="prayers.html#apostles-creed">宗徒信經 (Apostles' Creed)</a></li>
-            <li><a href="prayers.html#nicene-creed">尼西亞信經 (Nicene Creed)</a></li>
-            <li><a href="prayers.html#fatima-prayer">法蒂瑪聖母禱詞 (Fatima Prayer)</a></li>
-        </ul>
-    </nav>
+    <h1 class="main-title">經文目錄</h1>
+    
+    <section>
+        <h2 class="section-title">
+            <a href="prayers.html">常用經文<span>Common Prayers</span></a>
+        </h2>
+        <nav>
+            <ul class="prayer-list common-prayers">
+                <li><a href="prayers.html#sign-of-the-cross">聖號經 (The Sign of the Cross)</a></li>
+                <li><a href="prayers.html#our-father">天主經 (Our Father)</a></li>
+                <li><a href="prayers.html#hail-mary">聖母經 (Hail Mary)</a></li>
+                <li><a href="prayers.html#glory-be">聖三光榮經 (Glory Be)</a></li>
+                <li><a href="prayers.html#act-of-contrition">痛悔經 (Act of Contrition)</a></li>
+                <li><a href="prayers.html#hail-holy-queen">又聖母經 (Hail Holy Queen)</a></li>
+                <li><a href="prayers.html#apostles-creed">宗徒信經 (Apostles' Creed)</a></li>
+                <li><a href="prayers.html#nicene-creed">尼西亞信經 (Nicene Creed)</a></li>
+                <li style="grid-column: 1 / -1;"><a href="prayers.html#fatima-prayer">法蒂瑪聖母禱詞 (Fatima Prayer)</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <section>
+        <h2 class="section-title special-title">
+            <a href="essential-directory.html">要經彙集</a>
+        </h2>
+        <nav>
+            <ul class="prayer-list special-prayers">
+                <li><a href="yaochinghuichi/directory.html" style="font-size: 1.2em; font-weight: bold; padding: 20px;">進入要經彙集專欄 →</a></li>
+            </ul>
+        </nav>
+    </section>
 </div>
 
 </body>
