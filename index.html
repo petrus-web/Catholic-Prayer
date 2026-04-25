@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>常用經文 - 首頁</title>
+    <title>常用經文 (Common Prayers) - 首頁 (Home)</title>
     <style>
         body {
             font-family: "Microsoft JhengHei", Arial, sans-serif;
@@ -19,25 +19,23 @@
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             text-align: center;
         }
-        /* 大標題連結樣式 */
-        .main-title {
-            text-decoration: none;
-            display: inline-block;
-        }
-        .main-title h1 {
+        h1 {
             color: #2c3e50;
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
             margin-bottom: 30px;
-            transition: color 0.3s, border-color 0.3s;
+            font-size: 2em;
         }
-        .main-title:hover h1 {
-            color: #3498db;
-            border-color: #2980b9;
+        h1 span {
+            display: block;
+            font-size: 0.6em;
+            color: #7f8c8d;
+            margin-top: 5px;
+            font-weight: normal;
         }
         ul {
             list-style: none;
@@ -46,10 +44,10 @@
         li {
             margin: 15px 0;
         }
-        .nav-link {
+        a {
             text-decoration: none;
             color: #34495e;
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: 500;
             transition: all 0.3s;
             display: block;
@@ -58,7 +56,7 @@
             background: #fdfdfd;
             border: 1px solid #eee;
         }
-        .nav-link:hover {
+        a:hover {
             color: #3498db;
             background: #f0f8ff;
             border-color: #3498db;
@@ -69,21 +67,18 @@
 <body>
 
 <div class="container">
-    <a href="prayers.html" class="main-title">
-        <h1>常用經文</h1>
-    </a>
-    
+    <h1>常用經文 Common Prayers </h1>
     <nav>
         <ul>
-            <li><a class="nav-link" href="prayers.html#sign-of-the-cross">聖號經</a></li>
-            <li><a class="nav-link" href="prayers.html#our-father">天主經</a></li>
-            <li><a class="nav-link" href="prayers.html#hail-mary">聖母經</a></li>
-            <li><a class="nav-link" href="prayers.html#glory-be">聖三光榮經</a></li>
-            <li><a class="nav-link" href="prayers.html#act-of-contrition">痛悔經</a></li>
-            <li><a class="nav-link" href="prayers.html#hail-holy-queen">又聖母經</a></li>
-            <li><a class="nav-link" href="prayers.html#apostles-creed">宗徒信經</a></li>
-            <li><a class="nav-link" href="prayers.html#nicene-creed">尼西亞信經</a></li>
-            <li><a class="nav-link" href="prayers.html#fatima-prayer">法蒂瑪聖母禱詞</a></li>
+            <li><a href="prayers.html#sign-of-the-cross">聖號經 (The Sign of the Cross)</a></li>
+            <li><a href="prayers.html#our-father">天主經 (Our Father)</a></li>
+            <li><a href="prayers.html#hail-mary">聖母經 (Hail Mary)</a></li>
+            <li><a href="prayers.html#glory-be">聖三光榮經 (Glory Be)</a></li>
+            <li><a href="prayers.html#act-of-contrition">痛悔經 (Act of Contrition)</a></li>
+            <li><a href="prayers.html#hail-holy-queen">又聖母經 (Hail Holy Queen)</a></li>
+            <li><a href="prayers.html#apostles-creed">宗徒信經 (Apostles' Creed)</a></li>
+            <li><a href="prayers.html#nicene-creed">尼西亞信經 (Nicene Creed)</a></li>
+            <li><a href="prayers.html#fatima-prayer">法蒂瑪聖母禱詞 (Fatima Prayer)</a></li>
         </ul>
     </nav>
 </div>
