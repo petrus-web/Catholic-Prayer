@@ -53,17 +53,29 @@
             font-size: 0.7em;
             font-weight: normal;
         }
-        .section-title a:hover span {
-             color: #3498db;
-             transition: color 0.3s;
+        
+        /* 玫瑰經的特殊顏色設計 */
+        .rosary-title {
+            border-bottom-color: #8e44ad;
+        }
+        .rosary-title a:hover {
+            color: #8e44ad;
         }
 
-        /* 要经汇集的特殊颜色设计 */
+        /* 要經彙集的特殊顏色設計 */
         .special-title {
             border-bottom-color: #e67e22;
         }
         .special-title a:hover {
             color: #e67e22;
+        }
+
+        /* 其餘禱文的特殊顏色設計 */
+        .others-title {
+            border-bottom-color: #16a085;
+        }
+        .others-title a:hover {
+            color: #16a085;
         }
 
         .prayer-list {
@@ -87,23 +99,38 @@
             border: 1px solid #eee;
             text-align: center;
         }
-        /* 常用经文鼠标悬停（蓝色） */
+        /* 常用經文滑鼠懸停（藍色） */
         .common-prayers a:hover {
             color: #3498db;
             background: #f0f8ff;
             border-color: #3498db;
             transform: translateY(-2px);
         }
-        /* 要经汇集鼠标悬停（橙色） */
+        /* 玫瑰經滑鼠懸停（紫色） */
+        .rosary-prayers a:hover {
+            color: #8e44ad;
+            background: #f4eef8;
+            border-color: #8e44ad;
+            transform: translateY(-2px);
+        }
+        /* 要經彙集滑鼠懸停（橙色） */
         .special-prayers a:hover {
             color: #e67e22;
             background: #fff5e6;
             border-color: #e67e22;
             transform: translateY(-2px);
         }
+        /* 其餘禱文滑鼠懸停（綠色） */
+        .others-prayers a:hover {
+            color: #16a085;
+            background: #e8f6f3;
+            border-color: #16a085;
+            transform: translateY(-2px);
+        }
         
         @media (min-width: 600px) {
-            .common-prayers.prayer-list {
+            .common-prayers.prayer-list,
+            .others-prayers.prayer-list {
                 grid-template-columns: 1fr 1fr;
             }
         }
@@ -128,18 +155,45 @@
                 <li><a href="prayers.html#hail-holy-queen">又聖母經 (Hail Holy Queen)</a></li>
                 <li><a href="prayers.html#apostles-creed">宗徒信經 (Apostles' Creed)</a></li>
                 <li><a href="prayers.html#nicene-creed">尼西亞信經 (Nicene Creed)</a></li>
-                <li style="grid-column: 1 / -1;"><a href="prayers.html#fatima-prayer">法蒂瑪聖母禱詞 (Fatima Prayer)</a></li>
+                <li><a href="prayers.html#fatima-prayer">法蒂瑪聖母禱詞 (Fatima Prayer)</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <section>
+        <h2 class="section-title rosary-title">
+            <a>玫瑰經<span>Holy Rosary</span></a>
+        </h2>
+        <nav>
+            <ul class="prayer-list rosary-prayers">
+                <li><a href="holy-rosary/joyful.html">歡喜五端 (Joyful Mysteries) Mon, Sat, Sun Advent till Lent</a></li>
+                <li><a href="holy-rosary/luminous.html">光明五端 (Luminous Mysteries) Thur</a></li>
+                <li><a href="holy-rosary/sorrowful.html">痛苦五端 (Sorrowful Mysteries) Tue, Fri, Sun in Lent</a></li>
+                <li><a href="holy-rosary/glorious.html">榮福五端 (Glorious Mysteries) Wed, Sun Easter till Advent</a></li>
             </ul>
         </nav>
     </section>
 
     <section>
         <h2 class="section-title special-title">
-            <a href="essential-directory.html">要經彙集</a>
+            <a href="yaochinghuichi/directory.html">要經彙集</a>
         </h2>
         <nav>
             <ul class="prayer-list special-prayers">
                 <li><a href="yaochinghuichi/directory.html" style="font-size: 1.2em; font-weight: bold; padding: 20px;">進入要經彙集專欄 →</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <section>
+        <h2 class="section-title others-title">
+            <a>其餘禱文<span>Other Prayers</span></a>
+        </h2>
+        <nav>
+            <ul class="prayer-list others-prayers">
+                <!--<li><a href="others/stations-of-the-cross-chinese.html">苦路善工 中文</a></li>
+                <li><a href="others/stations-of-the-cross-english.html">Stations of the Cross (English Ver.)</a></li>-->
+                <li><a href="others/divine-mercy.html">慈悲串經 (Divine Mercy Chaplet)</a></li>
             </ul>
         </nav>
     </section>
