@@ -3,96 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>要經彙集 - 完整目錄</title>
+    <title>要經彙集 - 整合目錄</title>
     <style>
-        /* 使用與常用經文一致的字體 Stack */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Microsoft JhengHei', 'Heiti TC', 'Apple LiGothic', sans-serif;
             background-color: #f9f9f9;
             color: #333;
-            line-height: 1.6;
-            padding: 20px;
+            line-height: 1.4;
+            padding: 10px;
             margin: 0;
         }
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 15px;
         }
         .header h1 {
             color: #d35400;
-            border-bottom: 2px solid #e67e22;
-            padding-bottom: 10px;
+            border-bottom: 3px solid #e67e22;
+            padding-bottom: 5px;
             display: inline-block;
-            margin-bottom: 5px;
-            font-weight: 700;
+            margin: 5px 0;
+            font-size: 2.2em;
+            font-weight: 800;
         }
         .header p {
             color: #7f8c8d;
-            margin-top: 0;
+            font-size: 1.1em;
+            margin: 0;
         }
         .back-link {
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             color: #e67e22;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1em;
         }
         .back-link:hover {
             text-decoration: underline;
         }
-        /* 卡片網格排版 */
+        /* 單欄排列 */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 5px;
         }
-        /* 卡片樣式 */
-        .prayer-card {
-            display: block;
+        .theme-card {
             background: #fff;
-            padding: 30px 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            color: #333;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            border-top: 6px solid #e67e22;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border-top: 10px solid #e67e22;
             transition: all 0.3s ease;
-            height: 100%;
-            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
         }
-        .prayer-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(230, 126, 34, 0.15);
+        .theme-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.12);
             background-color: #fffaf5;
         }
-        .prayer-card h2 {
+        .theme-card h2 {
             margin: 0 0 10px 0;
-            font-size: 1.8em;
+            font-size: 2.0em;
             color: #d35400;
-            letter-spacing: 2px;
-            font-weight: 600;
+            font-weight: 700;
+            text-align: center;
         }
-        .prayer-card p {
-            margin: 0;
-            color: #666;
-            font-size: 0.95em;
+        /* 子項目連結列表 */
+        .sub-items {
+            border-top: 2px solid #fdf2e9;
+            padding-top: 10px;
+            text-align: center;
         }
-        /* 章節標題 */
-        .section-title {
-            grid-column: 1 / -1;
-            margin-top: 30px;
-            margin-bottom: 10px;
+        .sub-items.weekly-list {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .sub-items a {
+            display: inline-block;
+            background: #fdf2e9;
             color: #e67e22;
-            font-size: 1.2em;
-            border-left: 4px solid #e67e22;
-            padding-left: 10px;
+            padding: 10px 25px;
+            border-radius: 40px;
+            margin: 5px;
+            text-decoration: none;
+            font-size: 1.6em;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 1px solid #fab1a0;
+        }
+        .sub-items.weekly-list a {
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            padding: 12px 25px;
+            margin: 0;
+        }
+        .sub-items a:hover {
+            background: #e67e22;
+            color: #fff;
+            border-color: #e67e22;
+        }
+        .sub-items a span.remark {
+            font-size: 0.65em;
+            font-weight: normal;
+            opacity: 0.8;
+            margin-top: -2px;
+        }
+        .main-link {
+            text-align: right;
+            margin-top: auto;
+            padding-top: 10px;
+        }
+        .main-link a {
+            color: #e67e22;
+            text-decoration: none;
             font-weight: bold;
+            font-size: 1em;
         }
     </style>
 </head>
@@ -102,77 +137,93 @@
 
         <div class="header">
             <h1>要經彙集</h1>
-            <p>全書目錄</p>
         </div>
 
         <div class="card-grid">
-            <div class="section-title">每日課業</div>
-            
-            <a href="tsaotao.html" class="prayer-card">
-                <h2>早 禱</h2>
-                <p>早上初起身時誦念</p>
-            </a>
+            <div class="theme-card">
+                <h2>早晚禱</h2>
+                <div class="sub-items">
+                    <a href="tsaowantao.html#tsaotao">早禱</a>
+                    <a href="tsaowantao.html#wantao">晚禱</a>
+                    <a href="tsaowantao.html#chita">其他</a>
+                </div>
+                <div class="main-link"><a href="tsaowantao.html">查看全文 →</a></div>
+            </div>
 
-            <a href="wantao.html" class="prayer-card">
-                <h2>晚 禱</h2>
-                <p>每晚安息前誦念</p>
-            </a>
-            <a href="chita.html" class="prayer-card">
-                <h2>其 他</h2>
-                <p>聖三光榮頌，聖灰經，聖枝經，求為主教誦，求為神父誦，灑聖水經，飯前飯後祝文，為已亡教宗祝文</p>
-            </a>
+            <div class="theme-card">
+                <h2>彌撒規程與謝聖體經</h2>
+                <div class="sub-items">
+                    <a href="misahsiehshengtiching.html#misakueicheng">彌撒規程</a>
+                    <a href="misahsiehshengtiching.html#hsiehshengtiching">謝聖體經</a>
+                </div>
+                <div class="main-link"><a href="misahsiehshengtiching.html">查看全文 →</a></div>
+            </div>
 
-            <div class="section-title">聖事與敬禮</div>
+            <div class="theme-card">
+                <h2>週主日禱文 建設中，請不要點擊</h2>
+                <div class="sub-items weekly-list">
+                    <a href="chouchujihtaowen.html#chu-jih">
+                        欽崇天主聖三
+                        <span class="remark">主日</span>
+                    </a>
+                    <a href="chouchujihtaowen.html#chan-li-er">
+                        拯救亡者煉靈
+                        <span class="remark">瞻禮二</span>
+                    </a>
+                    <a href="chouchujihtaowen.html#chan-li-san">
+                        感戴護守天神
+                        <span class="remark">瞻禮三</span>
+                    </a>
+                    <a href="chouchujihtaowen.html#chan-li-szu">
+                        怙恃大聖若瑟
+                        <span class="remark">瞻禮四</span>
+                    </a>
+                    <a href="chouchujihtaowen.html#chan-li-wu">
+                        虔敬耶穌聖體
+                        <span class="remark">瞻禮五</span>
+                    </a>
+                    <a href="chouchujihtaowen.html#chan-li-liu">
+                        虔敬耶穌聖心
+                        <span class="remark">瞻禮六</span>
+                    </a>
+                    <a href="chouchujihtaowen.html#chan-li-chi">
+                        孝敬仁慈聖母
+                        <span class="remark">瞻禮七</span>
+                    </a>
+                </div>
+                <div class="main-link"><a href="chouchujihtaowen.html">查看全文 →</a></div>
+            </div>
 
-            <a href="misakueicheng.html" class="prayer-card">
-                <h2>彌撒規程</h2>
-                <p>參與大祭與領聖體前後誦</p>
-            </a>
-
-            <a href="hsiehshengtiching.html" class="prayer-card">
-                <h2>謝聖體經</h2>
-                <p>領受聖體後之感謝祝文</p>
-            </a>
-            <!--
-            <div class="section-title">週主日與瞻禮</div>
-
-            <a href="chouchujihtaowen.html" class="prayer-card">
-                <h2>週主日禱文</h2>
-                <p>欽崇聖三、拯救煉靈與護守天神</p>
-            </a>
-
-            <a href="yehsushenghsin.html" class="prayer-card">
-                <h2>耶穌聖心</h2>
-                <p>瞻禮六：虔敬耶穌聖心禱文</p>
-            </a>
-
-            <a href="shengmushenghsin.html" class="prayer-card">
-                <h2>聖母聖心</h2>
-                <p>瞻禮七：孝敬仁慈聖母禱文</p>
-            </a>
-
-            <div class="section-title">聖母敬禮</div>
-
-            <a href="meikueiching.html" class="prayer-card">
+            <div class="theme-card">
                 <h2>玫瑰經</h2>
-                <p>歡喜、痛苦、榮福與光明端</p>
-            </a>
+                <div class="sub-items">
+                    <a href="meikueiching.html#joyful">歡喜</a>
+                    <a href="meikueiching.html#sorrowful">痛苦</a>
+                    <a href="meikueiching.html#glorious">榮福</a>
+                    <a href="meikueiching.html#luminous">光明</a>
+                </div>
+                <div class="main-link"><a href="meikueiching.html">查看全文 →</a></div>
+            </div>
+<!---
+            <div class="theme-card">
+                <h2>聖路善工 建設中，請不要點擊</h2>
+                <div class="sub-items">
+                    <a href="shenglushankung.html">聖路善工全文</a>
+                </div>
+                <div class="main-link"><a href="shenglushankung.html">查看全文 →</a></div>
+            </div>
 
-            <div class="section-title">苦路善工</div>
-
-            <a href="shenglushankung.html" class="prayer-card">
-                <h2>聖路善工</h2>
-                <p>默思耶穌受難十四處</p>
-            </a>
-
-            <div class="section-title">附錄</div>
-
-            <a href="fulu.html" class="prayer-card">
-                <h2>附 錄</h2>
-                <p>省察告解、付洗要式與雜經</p>
-            </a>
-        </div>
+            <div class="theme-card">
+                <h2>附錄 建設中，請不要點擊</h2>
+                <div class="sub-items">
+                    <a href="fulu.html#kao-chieh">省察告解</a>
+                    <a href="fulu.html#fu-hsi">付洗禮</a>
+                    <a href="fulu.html#tsa-ching">雜經</a>
+                </div>
+                <div class="main-link"><a href="fulu.html">查看全文 →</a></div>
+            </div>
         -->
+        </div>
     </div>
 </body>
 </html>
