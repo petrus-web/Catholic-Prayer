@@ -78,6 +78,14 @@
             color: #16a085;
         }
 
+        /* 外部資源的特殊顏色設計 (新增) */
+        .external-title {
+            border-bottom-color: #7f8c8d;
+        }
+        .external-title a:hover {
+            color: #7f8c8d;
+        }
+
         .prayer-list {
             list-style: none;
             padding: 0;
@@ -127,10 +135,18 @@
             border-color: #16a085;
             transform: translateY(-2px);
         }
+        /* 外部資源滑鼠懸停（灰色） (新增) */
+        .external-links a:hover {
+            color: #2c3e50;
+            background: #f2f4f4;
+            border-color: #7f8c8d;
+            transform: translateY(-2px);
+        }
         
         @media (min-width: 600px) {
             .common-prayers.prayer-list,
-            .others-prayers.prayer-list {
+            .others-prayers.prayer-list,
+            .external-links.prayer-list {
                 grid-template-columns: 1fr 1fr;
             }
         }
@@ -166,10 +182,10 @@
         </h2>
         <nav>
             <ul class="prayer-list rosary-prayers">
-                <li><a href="holy-rosary/joyful.html">歡喜五端 (Joyful Mysteries) Mon, Sat, Sun Advent till Lent</a></li>
-                <li><a href="holy-rosary/luminous.html">光明五端 (Luminous Mysteries) Thur</a></li>
-                <li><a href="holy-rosary/sorrowful.html">痛苦五端 (Sorrowful Mysteries) Tue, Fri, Sun in Lent</a></li>
-                <li><a href="holy-rosary/glorious.html">榮福五端 (Glorious Mysteries) Wed, Sun Easter till Advent</a></li>
+                <li><a href="holy-rosary/joyful.html">歡喜五端 (Joyful)</a></li>
+                <li><a href="holy-rosary/luminous.html">光明五端 (Luminous)</a></li>
+                <li><a href="holy-rosary/sorrowful.html">痛苦五端 (Sorrowful)</a></li>
+                <li><a href="holy-rosary/glorious.html">榮福五端 (Glorious)</a></li>
             </ul>
         </nav>
     </section>
@@ -191,9 +207,25 @@
         </h2>
         <nav>
             <ul class="prayer-list others-prayers">
-                <!--<li><a href="others/stations-of-the-cross-chinese.html">苦路善工 中文</a></li>
-                <li><a href="others/stations-of-the-cross-english.html">Stations of the Cross (English Ver.)</a></li>-->
                 <li><a href="others/divine-mercy.html">慈悲串經 (Divine Mercy Chaplet)</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <section>
+        <h2 class="section-title external-title">
+            <a>外部資源<span>External Resources</span></a>
+        </h2>
+        <nav>
+            <ul class="prayer-list external-links">
+                <li><a href="https://www.ccreadbible.org/chinesebible/nab_nabhtm" target="_blank">聖經 Holy Bible</a></li>
+                <li><a href="https://mycatholic.sg/welcome" target="_blank">MyCatholicSG</a></li>
+                <li><a href="https://catholic.org.hk/" target="_blank">香港教區 HK DIOCESE</a></li>
+                <li><a href="https://www.catholic.org.mo/" target="_blank">澳門教區 Macau DIOCESE</a></li>
+                <li><a href="https://hcd.org.tw/wp-content/uploads/2025/11/2026%E7%A6%AE%E5%84%80%E5%B9%B4%E6%9B%86_%E6%96%B0%E7%AB%B9%E6%95%99%E5%8D%80.pdf" target="_blank">2026禮儀曆 (新竹教區) pdf</a></li>
+                <li><a href="https://gcatholic.org/calendar/ics/2026-en-SG.ics?v=3" target="_blank">下載 2026 新加坡禮儀曆 2026 SG Archdiocese Calendar (.ics)</a></li>
+                <li><a href="https://gcatholic.org/calendar/ics/2026-zt-HK.ics?v=3" target="_blank">下載 2026 香港禮儀曆 (.ics)</a></li>
+                <li><a href="https://gcatholic.org/calendar/2026/HK-en" target="_blank">2026 HK Diocese Calendar (.ics)</a></li>
             </ul>
         </nav>
     </section>
