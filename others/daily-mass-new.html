@@ -3,162 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Mass Readings</title>
+    <title>Mass Reading</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.8;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #f4f7f6;
+            color: #2c3e50;
+            line-height: 1.7;
             margin: 0;
             padding: 20px;
         }
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-        }
-        /* Navigation Header */
-        .nav-header {
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        /* Header */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
             border-bottom: 3px solid #16a085;
+            padding-bottom: 15px;
             margin-bottom: 30px;
         }
-        .nav-header h1 {
-            font-size: 1.8em;
-            color: #16a085;
-            margin: 0;
-        }
-        .back-home {
-            text-decoration: none;
-            color: #16a085;
-            font-weight: bold;
-            border: 2px solid #16a085;
-            padding: 6px 18px;
-            border-radius: 20px;
-            transition: 0.3s;
-        }
-        .back-home:hover {
-            background-color: #16a085;
-            color: white;
+        .header h1 { color: #16a085; margin: 0; font-size: 1.8em; }
+        .back-btn {
+            text-decoration: none; color: #16a085; font-weight: bold;
+            border: 2px solid #16a085; padding: 6px 15px; border-radius: 20px;
         }
 
-        /* Content Card */
-        .content-card {
-            background: #fff;
-            padding: 40px;
+        /* Calendar Info */
+        .calendar-info { margin-bottom: 25px; }
+        #Universalis_day { font-size: 1.4em; font-weight: bold; color: #16a085; display: block; }
+        #Universalis_date { color: #7f8c8d; font-size: 0.9em; text-transform: uppercase; }
+
+        /* Reading Cards */
+        .reading-section {
+            background: white;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            min-height: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
         }
-        .date-title {
-            color: #7f8c8d;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .feast-name {
-            color: #16a085;
-            font-size: 1.6em;
+        .reading-label {
             font-weight: bold;
-            margin-bottom: 30px;
-            border-left: 5px solid #16a085;
-            padding-left: 15px;
+            color: #16a085;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .reading-heading { font-size: 1.3em; font-weight: 700; margin-bottom: 10px; display: block; }
+        .reading-source { font-style: italic; color: #7f8c8d; display: block; margin-bottom: 15px; }
+        
+        /* Text styling */
+        .reading-text { font-size: 1.15em; }
+        .reading-text p { margin-bottom: 1em; }
+        .reading-text i { color: #95a5a6; font-style: normal; font-size: 0.9em; margin-right: 5px; }
+
+        footer {
+            text-align: center; margin-top: 50px; padding: 20px;
+            border-top: 1px solid #ddd; color: #95a5a6; font-size: 0.85em;
+        }
+        .loading-overlay { text-align: center; padding: 100px; font-style: italic; color: #bdc3c7; }
+    </style>
+
+    <script>
+        // The core logic to map JSON data to your HTML IDs
+        function universalisCallback(data) {
+            const ids = [
+                'Universalis_day', 'Universalis_date',
+                'Universalis_Mass_R1.heading', 'Universalis_Mass_R1.source', 'Universalis_Mass_R1.text',
+                'Universalis_Mass_Ps.source', 'Universalis_Mass_Ps.text',
+                'Universalis_Mass_R2.heading', 'Universalis_Mass_R2.source', 'Universalis_Mass_R2.text',
+                'Universalis_Mass_GA.source', 'Universalis_Mass_GA.text',
+                'Universalis_Mass_G.heading', 'Universalis_Mass_G.source', 'Universalis_Mass_G.text',
+                'Universalis_copyright.text'
+            ];
+
+            // Hide loading message
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+
+            ids.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    // Navigate through the nested data object
+                    const keys = id.split('.'); // handles "Mass_R1.text"
+                    let value = data;
+                    
+                    if (keys.length === 1) {
+                        value = data[keys[0].replace('Universalis_', '')];
+                    } else {
+                        // Handle Mass_R1, Mass_G etc.
+                        const category = keys[0].replace('Universalis_', '');
+                        const field = keys[1];
+                        value = data[category] ? data[category][field] : '';
+                    }
+
+                    if (value) {
+                        element.innerHTML = value;
+                    } else {
+                        // If no Reading 2 (common on weekdays), hide that section
+                        if (id.includes('R2')) {
+                            const parent = element.closest('.reading-section');
+                            if (parent) parent.style.display = 'none';
+                        }
+                    }
+                }
+            });
         }
 
-        /* Universalis text styling */
-        #universalis-content {
-            font-size: 1.15em;
-        }
-        /* Style for Scripture verses and italics from API */
-        #universalis-content i { color: #888; font-style: normal; font-size: 0.9em; }
-        #universalis-content b { color: #16a085; }
-        
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            color: #95a5a6;
-            font-size: 0.85em;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-        }
-        .loading {
-            text-align: center;
-            padding: 100px;
-            font-style: italic;
-            color: #bdc3c7;
-        }
-    </style>
+        // Script injection
+        (function() {
+            const script = document.createElement('script');
+            // Using Singapore calendar and English/Latin content
+            script.src = 'http://universalis.com/Singapore/jsonpmass.js?callback=universalisCallback';
+            document.head.appendChild(script);
+        })();
+    </script>
 </head>
 <body>
 
 <div class="container">
-    <div class="nav-header">
-        <h1>Daily Mass Readings</h1>
-        <a href="index.html" class="back-home">← Back to Home</a>
+    <div class="header">
+        <h1>Mass Reading</h1>
+        <a href="../index.html" class="back-btn">← Back to Home</a>
     </div>
 
-    <div class="content-card">
-        <div id="date-display" class="date-title"></div>
-        <div id="feast-display" class="feast-name">Loading...</div>
-        <div id="universalis-content">
-            <div class="loading">Fetching liturgy for Singapore...</div>
+    <div id="loading" class="loading-overlay">Preparing today's readings...</div>
+
+    <div id="content" style="display:none;">
+        <div class="calendar-info">
+            <span id="Universalis_date"></span>
+            <span id="Universalis_day"></span>
+        </div>
+
+        <div class="reading-section">
+            <span class="reading-label">First Reading</span>
+            <span id="Universalis_Mass_R1.heading" class="reading-heading"></span>
+            <span id="Universalis_Mass_R1.source" class="reading-source"></span>
+            <div id="Universalis_Mass_R1.text" class="reading-text"></div>
+        </div>
+
+        <div class="reading-section">
+            <span class="reading-label">Responsorial Psalm</span>
+            <span id="Universalis_Mass_Ps.source" class="reading-source"></span>
+            <div id="Universalis_Mass_Ps.text" class="reading-text"></div>
+        </div>
+
+        <div class="reading-section">
+            <span class="reading-label">Second Reading</span>
+            <span id="Universalis_Mass_R2.heading" class="reading-heading"></span>
+            <span id="Universalis_Mass_R2.source" class="reading-source"></span>
+            <div id="Universalis_Mass_R2.text" class="reading-text"></div>
+        </div>
+
+        <div class="reading-section">
+            <span class="reading-label">Gospel Acclamation</span>
+            <span id="Universalis_Mass_GA.source" class="reading-source"></span>
+            <div id="Universalis_Mass_GA.text" class="reading-text"></div>
+        </div>
+
+        <div class="reading-section">
+            <span class="reading-label">Gospel</span>
+            <span id="Universalis_Mass_G.heading" class="reading-heading"></span>
+            <span id="Universalis_Mass_G.source" class="reading-source"></span>
+            <div id="Universalis_Mass_G.text" class="reading-text"></div>
         </div>
     </div>
 
     <footer>
-        <p>© Universalis Publishing Ltd. | Data sourced from <a href="https://universalis.com" target="_blank" style="color: #16a085;">Universalis.com</a></p>
-        <p>For personal devotional use only. Singapore Liturgical Calendar.</p>
+        <p>Data provided by <a href="https://universalis.com" target="_blank" style="color:#16a085">Universalis.com</a></p>
     </footer>
 </div>
-<script>
-    // 1. The Callback Function
-    function universalisCallback(data) {
-        const container = document.getElementById('universalis-content');
-        const feastDisplay = document.getElementById('feast-display');
-        const dateDisplay = document.getElementById('date-display');
-
-        if (!data || !data.text) {
-            feastDisplay.innerText = "No Data Found";
-            container.innerHTML = "Today's readings could not be retrieved. Please try again later.";
-            return;
-        }
-
-        // Display Header Info
-        dateDisplay.innerText = data.day || "";
-        feastDisplay.innerText = data.heading || "Daily Mass";
-
-        // Display the Main Content
-        container.innerHTML = data.text;
-    }
-
-    // 2. The Loading Function
-    (function loadReadings() {
-        const script = document.createElement('script');
-        
-        /**
-         * ROBUST URL RULES:
-         * - Use https to avoid mixed-content blocks.
-         * - Structure: universalis.com/[Location]/[Command]/jsonp.js
-         * - Command 'v-v-en-la' ensures English/Latin side-by-side.
-         */
-        script.src = 'https://universalis.com/Singapore/v-v-en-la/jsonp.js?callback=universalisCallback';
-        
-        // Error Handling
-        script.onerror = function() {
-            document.getElementById('feast-display').innerText = "Connection Error";
-            document.getElementById('universalis-content').innerHTML = 
-                "Unable to reach Universalis. <br><br>" +
-                "<i>Note: If you are previewing this file locally (double-clicking the .html file), " +
-                "some browsers block external scripts. Try uploading it to a server or using a local web server extension.</i>";
-        };
-
-        document.body.appendChild(script);
-    })();
-</script>
 
 </body>
 </html>
