@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日彌撒讀經 - Daily Mass Readings</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background-color: #f9f9f9;
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #16a085; /* 延用其餘禱文的深綠色 */
+            padding-bottom: 15px;
+        }
+        .header-box h2 {
+            margin: 0;
+            color: #16a085;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: #16a085;
+            font-weight: bold;
+            border: 1px solid #16a085;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: #16a085;
+            color: #fff;
+        }
+        /* 嵌入框容器 */
+        .iframe-wrapper {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-height: 800px;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 1200px; /* 設定足夠的高度以顯示全文 */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <h2>Mass Reading (English + Latin)</h2>
+        <a href="../index.html" class="back-btn">← 返回首頁 Back to Home</a>
+    </div>
+
+    <div class="iframe-wrapper">
+        <iframe
+        src="https://universalis.com/L/asia.singapore/readings.htm"
+        name="universalis"
+        width="100%"
+        height="100%"
+        scrolling="auto"
+        align="top"
+        frameborder="3">
+      <a href="http://universalis.com">Please visit the 
+        Universalis web site</a>.
+      </iframe>
+    </div>
+</div>
+
+</body>
+<footer style="margin-top: 30px; padding: 20px; text-align: center; font-size: 0.85em; color: #7f8c8d; border-top: 1px solid #eee;">
+    <p>© Universalis Publishing Ltd. | Content provided by <a href="https://universalis.com" target="_blank" style="color: #16a085; text-decoration: none;">Universalis.com</a></p>
+    <p>該頁經文版權歸原版權所有人所有。本網頁僅供個人祈禱與靈修參考，請勿用於商業用途。</p>
+</footer>
+</html>
