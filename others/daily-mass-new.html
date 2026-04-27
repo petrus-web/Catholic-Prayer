@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Mass Readings</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        /* Navigation Header */
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 3px solid #16a085;
+            margin-bottom: 30px;
+        }
+        .nav-header h1 {
+            font-size: 1.8em;
+            color: #16a085;
+            margin: 0;
+        }
+        .back-home {
+            text-decoration: none;
+            color: #16a085;
+            font-weight: bold;
+            border: 2px solid #16a085;
+            padding: 6px 18px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .back-home:hover {
+            background-color: #16a085;
+            color: white;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 400px;
+        }
+        .date-title {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .feast-name {
+            color: #16a085;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            border-left: 5px solid #16a085;
+            padding-left: 15px;
+        }
+
+        /* Universalis text styling */
+        #universalis-content {
+            font-size: 1.15em;
+        }
+        /* Style for Scripture verses and italics from API */
+        #universalis-content i { color: #888; font-style: normal; font-size: 0.9em; }
+        #universalis-content b { color: #16a085; }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #95a5a6;
+            font-size: 0.85em;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .loading {
+            text-align: center;
+            padding: 100px;
+            font-style: italic;
+            color: #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav-header">
+        <h1>Daily Mass Readings</h1>
+        <a href="index.html" class="back-home">← Back to Home</a>
+    </div>
+
+    <div class="content-card">
+        <div id="date-display" class="date-title"></div>
+        <div id="feast-display" class="feast-name">Loading...</div>
+        <div id="universalis-content">
+            <div class="loading">Fetching liturgy for Singapore...</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© Universalis Publishing Ltd. | Data sourced from <a href="https://universalis.com" target="_blank" style="color: #16a085;">Universalis.com</a></p>
+        <p>For personal devotional use only. Singapore Liturgical Calendar.</p>
+    </footer>
+</div>
+<script>
+    // 1. The Callback Function
+    function universalisCallback(data) {
+        const container = document.getElementById('universalis-content');
+        const feastDisplay = document.getElementById('feast-display');
+        const dateDisplay = document.getElementById('date-display');
+
+        if (!data || !data.text) {
+            feastDisplay.innerText = "No Data Found";
+            container.innerHTML = "Today's readings could not be retrieved. Please try again later.";
+            return;
+        }
+
+        // Display Header Info
+        dateDisplay.innerText = data.day || "";
+        feastDisplay.innerText = data.heading || "Daily Mass";
+
+        // Display the Main Content
+        container.innerHTML = data.text;
+    }
+
+    // 2. The Loading Function
+    (function loadReadings() {
+        const script = document.createElement('script');
+        
+        /**
+         * ROBUST URL RULES:
+         * - Use https to avoid mixed-content blocks.
+         * - Structure: universalis.com/[Location]/[Command]/jsonp.js
+         * - Command 'v-v-en-la' ensures English/Latin side-by-side.
+         */
+        script.src = 'https://universalis.com/Singapore/v-v-en-la/jsonp.js?callback=universalisCallback';
+        
+        // Error Handling
+        script.onerror = function() {
+            document.getElementById('feast-display').innerText = "Connection Error";
+            document.getElementById('universalis-content').innerHTML = 
+                "Unable to reach Universalis. <br><br>" +
+                "<i>Note: If you are previewing this file locally (double-clicking the .html file), " +
+                "some browsers block external scripts. Try uploading it to a server or using a local web server extension.</i>";
+        };
+
+        document.body.appendChild(script);
+    })();
+</script>
+
+</body>
+</html>
