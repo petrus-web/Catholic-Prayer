@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mass Reading</title>
+
     <style>
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -14,8 +15,7 @@
             padding: 20px;
         }
         .container { max-width: 800px; margin: 0 auto; }
-        
-        /* Header */
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -30,12 +30,10 @@
             border: 2px solid #16a085; padding: 6px 15px; border-radius: 20px;
         }
 
-        /* Calendar Info */
         .calendar-info { margin-bottom: 25px; }
         #Universalis_day { font-size: 1.4em; font-weight: bold; color: #16a085; display: block; }
         #Universalis_date { color: #7f8c8d; font-size: 0.9em; text-transform: uppercase; }
 
-        /* Reading Cards */
         .reading-section {
             background: white;
             padding: 30px;
@@ -54,11 +52,9 @@
         }
         .reading-heading { font-size: 1.3em; font-weight: 700; margin-bottom: 10px; display: block; }
         .reading-source { font-style: italic; color: #7f8c8d; display: block; margin-bottom: 15px; }
-        
-        /* Text styling */
+
         .reading-text { font-size: 1.15em; }
         .reading-text p { margin-bottom: 1em; }
-        .reading-text i { color: #95a5a6; font-style: normal; font-size: 0.9em; margin-right: 5px; }
 
         footer {
             text-align: center; margin-top: 50px; padding: 20px;
@@ -68,33 +64,34 @@
     </style>
 
     <script>
-        // The core logic to map JSON data to your HTML IDs
-        function universalisCallback(data) {
+        //掛在windows
+        window.universalisCallback = function(data) {
+
+            //prevent null erorr
+            const loading = document.getElementById('loading');
+            if (loading) loading.style.display = 'none';
+
+            const content = document.getElementById('content');
+            if (content) content.style.display = 'block';
+
             const ids = [
                 'Universalis_day', 'Universalis_date',
                 'Universalis_Mass_R1.heading', 'Universalis_Mass_R1.source', 'Universalis_Mass_R1.text',
                 'Universalis_Mass_Ps.source', 'Universalis_Mass_Ps.text',
                 'Universalis_Mass_R2.heading', 'Universalis_Mass_R2.source', 'Universalis_Mass_R2.text',
                 'Universalis_Mass_GA.source', 'Universalis_Mass_GA.text',
-                'Universalis_Mass_G.heading', 'Universalis_Mass_G.source', 'Universalis_Mass_G.text',
-                'Universalis_copyright.text'
+                'Universalis_Mass_G.heading', 'Universalis_Mass_G.source', 'Universalis_Mass_G.text'
             ];
-
-            // Hide loading message
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
 
             ids.forEach(id => {
                 const element = document.getElementById(id);
                 if (element) {
-                    // Navigate through the nested data object
-                    const keys = id.split('.'); // handles "Mass_R1.text"
+                    const keys = id.split('.');
                     let value = data;
-                    
+
                     if (keys.length === 1) {
                         value = data[keys[0].replace('Universalis_', '')];
                     } else {
-                        // Handle Mass_R1, Mass_G etc.
                         const category = keys[0].replace('Universalis_', '');
                         const field = keys[1];
                         value = data[category] ? data[category][field] : '';
@@ -103,7 +100,6 @@
                     if (value) {
                         element.innerHTML = value;
                     } else {
-                        // If no Reading 2 (common on weekdays), hide that section
                         if (id.includes('R2')) {
                             const parent = element.closest('.reading-section');
                             if (parent) parent.style.display = 'none';
@@ -111,17 +107,17 @@
                     }
                 }
             });
-        }
+        };
 
-        // Script injection
-        (function() {
+        //wait DOM ready and load JSONP
+        document.addEventListener('DOMContentLoaded', function() {
             const script = document.createElement('script');
-            // Using Singapore calendar and English/Latin content
-            script.src = 'http://universalis.com/Singapore/jsonpmass.js?callback=universalisCallback';
-            document.head.appendChild(script);
-        })();
+            script.src = 'https://universalis.com/Singapore/jsonpmass.js?callback=universalisCallback';
+            document.body.appendChild(script);
+        });
     </script>
 </head>
+
 <body>
 
 <div class="container">
