@@ -127,30 +127,56 @@
 </head>
 <body>
     <script>
-        function togglePlay() {
-            const audio = document.getElementById('morningPrayerAudio');
-            const btn = document.getElementById('playBtn');
-            const icon = document.getElementById('playIcon');
+        let currentAudio = null;
+        let currentBtn = null;
     
-            if (audio.paused) {
-                audio.play();
-                icon.innerText = "⏸";
-                btn.style.backgroundColor = "#7f8c8d"; // 播放時改變顏色
-                btn.innerHTML = '<span id="playIcon">⏸</span> 暫停播放';
-            } else {
-                audio.pause();
-                icon.innerText = "▶";
-                btn.style.backgroundColor = "#e67e22";
-                btn.innerHTML = '<span id="playIcon">▶</span> 聆聽錄音';
+        function handlePlay(btn) {
+            const audioSrc = btn.getAttribute('data-audio');
+            const icon = btn.querySelector('.icon');
+            const text = btn.querySelector('.text');
+    
+            // 1. 如果點擊的是同一個正在播放的按鈕 -> 暫停
+            if (currentAudio && currentAudio.src.includes(audioSrc)) {
+                if (!currentAudio.paused) {
+                    currentAudio.pause();
+                    updateBtnState(btn, false);
+                } else {
+                    currentAudio.play();
+                    updateBtnState(btn, true);
+                }
+                return;
             }
+    
+            // 2. 如果點擊的是新按鈕 -> 停止舊的，播放新的
+            if (currentAudio) {
+                currentAudio.pause();
+                if (currentBtn) updateBtnState(currentBtn, false);
+            }
+    
+            // 創建或重置音頻對象
+            currentAudio = new Audio(audioSrc);
+            currentBtn = btn;
+    
+            currentAudio.play();
+            updateBtnState(btn, true);
+    
+            // 當播放結束時自動重置
+            currentAudio.onended = () => updateBtnState(btn, false);
         }
     
-        // 當音頻播放結束後自動重置按鈕
-        document.getElementById('morningPrayerAudio').onended = function() {
-            const btn = document.getElementById('playBtn');
-            btn.style.backgroundColor = "#e67e22";
-            btn.innerHTML = '<span id="playIcon">▶</span> 聆聽錄音';
-        };
+        function updateBtnState(btn, isPlaying) {
+            const icon = btn.querySelector('.icon');
+            const text = btn.querySelector('.text');
+            if (isPlaying) {
+                btn.classList.add('playing');
+                icon.innerText = "⏸";
+                text.innerText = "暫停播放";
+            } else {
+                btn.classList.remove('playing');
+                icon.innerText = "▶";
+                text.innerText = "聆聽錄音";
+            }
+        }
     </script>
     <div class="container">
         <div class="nav-links">
@@ -163,10 +189,10 @@
         <div id="tsaotao" class="section-anchor">
             <h1 style="color:#d35400; font-size: 2.1em; text-align: center;">早 禱</h1>
             <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-                <button onclick="togglePlay()" id="playBtn" class="audio-btn">
-                    <span id="playIcon">▶</span> 聆聽錄音
+                <button class="audio-btn" data-audio="audio/morning_prayer.mp3" onclick="handlePlay(this)">
+                    <span class="icon">▶</span> <span class="text">聆聽錄音</span>
                 </button>
-                <audio id="morningPrayerAudio" src="audio/morning_prayer.mp3"></audio>
+                
             </div>
             <h2 class="prayer-title">早課小引</h2>
             <div class="prayer-text">早上初起身時、即須感謝天主賜我一夜平安不死。又宜求天主、指引我今日能爲善事、不致犯罪。當跪拜天主聖像前誦經如下。</div>
@@ -276,10 +302,9 @@
         <div id="wantao" class="section-anchor">
             <h1 style="color:#d35400; font-size: 2.1em; text-align: center;">晚 禱</h1>
             <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-                <button onclick="togglePlay()" id="playBtn" class="audio-btn">
-                    <span id="playIcon">▶</span> 聆聽錄音
+                <button class="audio-btn" data-audio="audio/night_prayer.mp3" onclick="handlePlay(this)">
+                    <span class="icon">▶</span> <span class="text">聆聽錄音</span>
                 </button>
-                <audio id="morningPrayerAudio" src="audio/night_prayer.mp3"></audio>
             </div>
             <h2 class="prayer-title">五拜禮</h2>
             <div class="prayer-text">一拜、信天主、一概邪妄之事俱棄絕。<br>二拜、望天主、保佑全赦我諸罪。<br>三拜、愛敬至尊至善之主、於萬有之上。<br>四拜、一心痛悔我之罪過、定心再不敢得罪於天主。<br>五拜、懇祈聖母轉求天主、賜我善終恩佑。</div>
