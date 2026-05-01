@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>閱讀經文</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #2c3e50; max-width: 600px; margin: 0 auto; padding: 20px; background: #fff; }
+        .nav-bar { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .btn { text-decoration: none; color: #16a085; font-weight: bold; }
+        h1 { color: #16a085; border-bottom: 2px solid #16a085; padding-bottom: 10px; }
+        .quote-box { background: #f9f9f9; border-left: 5px solid #16a085; padding: 15px; font-style: italic; margin: 20px 0; }
+        .content { font-size: 1.1em; white-space: pre-wrap; margin-bottom: 30px; }
+        
+        /* 祈禱區塊的樣式保留，只有在被生成時才會生效 */
+        .prayer-box { 
+            margin-top: 30px; 
+            padding: 15px; 
+            background: #e8f6f3; 
+            border-radius: 8px; 
+            border: 1px dashed #16a085; 
+        }
+        .prayer-box strong { color: #16a085; display: block; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <a href="index.html" class="btn">← 返回目錄</a>
+    </div>
+
+    <div id="app">
+        <h1 id="title">加載中...</h1>
+        <div class="content" id="content"></div>
+        
+        <div id="prayer-container"></div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        // 1. 獲取網址裡的 ID (例如 reader.html?id=1)
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id'));
+
+        // 2. 從數據中找尋對應項目
+        // 確保 PRAYER_DATA 已在 data.js 中定義
+        const pageData = typeof PRAYER_DATA !== 'undefined' ? PRAYER_DATA.find(item => item.id === id) : null;
+
+        // 3. 填入網頁
+        if (pageData) {
+            // 填充基本標題與內容
+            document.getElementById('title').innerText = pageData.title;
+            document.getElementById('content').innerHTML = pageData.content;
+            document.title = pageData.title;
+
+            // --- 做法二：邏輯檢測並動態生成祈禱區塊 ---
+            const container = document.getElementById('prayer-container');
+            
+            // 判斷是否有 prayer 字段，且內容不為空
+            if (pageData.prayer && pageData.prayer.trim() !== "") {
+                container.innerHTML = `
+                    <div class="prayer-box">
+                        <strong>今日祈禱：</strong>
+                        <p>${pageData.prayer}</p>
+                    </div>
+                `;
+            } else {
+                // 如果沒有祈禱文，清空容器（確保安全）
+                container.innerHTML = "";
+            }
+            
+        } else {
+            // 如果找不到 ID 對應的數據
+            document.getElementById('app').innerHTML = "<h2>內容未找到</h2><a href='index.html' class='btn'>返回目錄</a>";
+        }
+    </script>
+</body>
+</html>

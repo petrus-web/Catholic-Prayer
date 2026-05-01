@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>33天奉獻聖若瑟</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
+        h1 { color: #16a085; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; max-width: 800px; margin: 0 auto; }
+        .card { 
+            background: white; border: 1px solid #16a085; border-radius: 8px; 
+            padding: 20px; text-align: center; cursor: pointer; text-decoration: none;
+            color: #333; transition: 0.3s;
+        }
+        .card:hover { background: #16a085; color: white; }
+        .card span { display: block; font-size: 0.8em; margin-bottom: 5px; color: #666; }
+        .card:hover span { color: #eee; }
+        .back-home {
+            text-decoration: none;
+            color: #16a085;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-home">← Back to Home</a>
+    <h1>33天奉獻聖若瑟</h1>
+    <div class="grid" id="menu-grid">
+        </div>
+
+    <script src="data.js"></script>
+    <script>
+        const grid = document.getElementById('menu-grid');
+        // 根据 data.js 里的数据自动画出 33 个按钮
+        PRAYER_DATA.forEach(item => {
+            const a = document.createElement('a');
+            a.className = 'card';
+            a.href = `reader.html?id=${item.id}`;
+            a.innerHTML = `<strong>${item.title}</strong>`;
+            grid.appendChild(a);
+        });
+    </script>
+</body>
+</html>
